@@ -1,6 +1,9 @@
 # action.yml
 name: 'auto-fmt'
 description: 'Execute `terrafrom fmt` for edited .tf files.'
+brands:
+  icon: check-circle
+  color: purple
 runs:
   using: 'docker'
   image: 'Dockerfile'
