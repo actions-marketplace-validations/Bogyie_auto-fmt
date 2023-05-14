@@ -4,11 +4,25 @@ description: 'Execute `terrafrom fmt` for edited .tf files.'
 branding:
   icon: check-circle
   color: purple
+
+inputs:
+  token:
+    default: ${{ github.token }}
+
+  repository:
+    default: ${{ github.repository }}
+
+  base_ref:
+    default: ${{ github.base_ref }}
+
+  haed_ref:
+    default: ${{ github.head_ref }}
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ secrets.GITHUB_TOKEN }}
-    - ${{ github.repository }}
-    - ${{ github.base_ref }}
-    - ${{ github.head_ref }}
+    - ${{ inputs.token }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.base_ref }}
+    - ${{ inputs.head_ref }}
