@@ -6,7 +6,7 @@
 # INPUT_BASE_REF
 # INPUT_HEAD_REF 
 # INPUT_TRIGGERING_ACTOR
-ROOT_DIR="/var/auto-fmt"
+ROOT_DIR="/"
 PULL_NUMBER=$(grep -o '[0-9]*' $INPUT_REF)
 
 git clone "https://$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git" repo
