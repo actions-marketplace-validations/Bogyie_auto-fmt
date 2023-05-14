@@ -1,0 +1,11 @@
+# action.yml
+name: 'Terraform fmt'
+description: 'Terraform fmt'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ secrets.GITHUB_TOKEN }}
+    - ${{ github.repository }}
+    - ${{ github.base_ref }}
+    - ${{ github.head_ref }}
