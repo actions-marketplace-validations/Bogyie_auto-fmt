@@ -1,7 +1,7 @@
 FROM ubuntu:latest AS ubuntu
 
 # Install git, gpg, wget, lsb-release
-RUN apt-get update && apt-get install -y git gpg wget lsb-release
+RUN apt-get update && apt-get install -y curl git gpg wget lsb-release
 
 # Install terraform
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && \

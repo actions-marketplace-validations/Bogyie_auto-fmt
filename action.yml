@@ -15,7 +15,7 @@ inputs:
   base_ref:
     default: ${{ github.base_ref }}
 
-  haed_ref:
+  head_ref:
     default: ${{ github.head_ref }}
 
   triggering_actor:
