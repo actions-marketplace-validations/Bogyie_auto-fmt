@@ -1,6 +1,6 @@
 # action.yml
-name: 'Terraform fmt'
-description: 'Terraform fmt'
+name: 'bogyie/auto-fmt'
+description: 'Execute `terrafrom fmt` for edited .tf files.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
