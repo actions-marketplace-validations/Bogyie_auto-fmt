@@ -18,30 +18,16 @@ if [ -d repo ]; then
     echo $edited_files
 
     reformated_files=""
-    reformated_file_details=""
     for edited_file in $edited_files; do
         reformat_needs=$(terraform fmt -write=false -check "$edited_file")
         if [ -n "$reformat_needs" ]; then
             reformated_file=$(terraform fmt -write=false -list=true "$edited_file")
-            reformated_file_detail=$(terraform fmt -diff -no-color "$edited_file")
-            reformated_file_detail_codeblock="\n\`\`\`\n$reformated_file_detail\n\`\`\`\n"
-
-            reformated_files="$reformated_files\n- $reformated_file"
-            reformated_file_details="$reformated_file_details\n$reformated_file_detail_codeblock"
+            reformated_files="$reformated_files\n- [$reformated_file]($reformated_file)"
         fi
     done
 
     # If exist re-formatting .tf file
     if [ -n "$reformated_files" ]; then
-
-        reformated_files="$reformated_files\n<details>"
-        reformated_files="$reformated_files\n<summary>Details</summary>"
-        reformated_files="$reformated_files\n<p>"
-        reformated_files="$reformated_files\n"
-        reformated_files="$reformated_files $reformated_file_details"
-        reformated_files="$reformated_files\n"
-        reformated_files="$reformated_files\n</p>"
-        reformated_files="$reformated_files\n</details>"
 
         git config --global user.name $INPUT_TRIGGERING_ACTOR && \
             git config --global user.email $INPUT_TRIGGERING_ACTOR@github.com && \
