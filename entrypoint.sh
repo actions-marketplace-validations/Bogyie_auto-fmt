@@ -18,20 +18,37 @@ if [ -d repo ]; then
     echo $edited_files
 
     reformated_files=""
+    reformated_file_details=""
     for edited_file in $edited_files; do
-        reformated_file=$(terraform fmt -list=true "$edited_file")
-        if [ -n "$reformated_file" ]; then
-            reformated_files="$reformated_files\n-$reformated_file"
+        reformat_needs=$(terraform fmt -write=false -check "$edited_file")
+        if [ -n "$reformat_needs" ]; then
+            reformated_file=$(terraform fmt -write=false -list=true "$edited_file")
+            reformated_file_detail=$(terraform fmt -diff -no-color "$edited_file")
+            reformated_file_detail_codeblock="\n\`\`\`\n$reformated_file_detail\n\`\`\`\n"
+
+            reformated_files="$reformated_files\n- $reformated_file"
+            reformated_file_details="$reformated_file_details\n$reformated_file_detail_codeblock"
         fi
     done
 
     # If exist re-formatting .tf file
     if [ -n "$reformated_files" ]; then
 
+        reformated_files="$reformated_files\n<details>"
+        reformated_files="$reformated_files\n<summary>Details</summary>"
+        reformated_files="$reformated_files\n<p>"
+        reformated_files="$reformated_files\n"
+        reformated_files="$reformated_files $reformated_file_details"
+        reformated_files="$reformated_files\n"
+        reformated_files="$reformated_files\n</p>"
+        reformated_files="$reformated_files\n</details>"
+        
+
+
         git config --global user.name $INPUT_TRIGGERING_ACTOR && \
             git config --global user.email $INPUT_TRIGGERING_ACTOR@github.com && \
-            git commit --amend --no-edit && \
             git add . && \
+            git commit --amend --no-edit && \
             git push --force && \
             echo "Req URL: https://api.github.com/repos/$INPUT_REPOSITORY/issues/$PULL_NUMBER/comments" && \
             curl -L \
@@ -40,6 +57,6 @@ if [ -d repo ]; then
                 -H "Authorization: Bearer $INPUT_TOKEN"\
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/$INPUT_REPOSITORY/issues/$PULL_NUMBER/comments \
-                -d '{"body":"Next files are reformatted\n\n'$reformated_files'"}'
+                -d '{"body":":robot: Next files are reformatted\n'$reformated_files'"}'
     fi
 fi
