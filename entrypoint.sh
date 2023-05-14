@@ -42,8 +42,6 @@ if [ -d repo ]; then
         reformated_files="$reformated_files\n"
         reformated_files="$reformated_files\n</p>"
         reformated_files="$reformated_files\n</details>"
-        
-
 
         git config --global user.name $INPUT_TRIGGERING_ACTOR && \
             git config --global user.email $INPUT_TRIGGERING_ACTOR@github.com && \
@@ -57,6 +55,6 @@ if [ -d repo ]; then
                 -H "Authorization: Bearer $INPUT_TOKEN"\
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/$INPUT_REPOSITORY/issues/$PULL_NUMBER/comments \
-                -d '{"body":":robot: Next files are reformatted\n'$reformated_files'"}'
+                -d '{"body":":robot: Next files are reformatted\n'"$reformated_files"'"}'
     fi
 fi
