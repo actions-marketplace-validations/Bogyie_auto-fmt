@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/sh
 
 # INPUT_TOKEN
 # INPUT_REPOSITORY
@@ -8,7 +8,7 @@
 # INPUT_TRIGGERING_ACTOR
 PULL_NUMBER=$(grep -o '[0-9]*' $INPUT_REF)
 
-git clone "https://$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git" repo
+git clone "https://$INPUT_TRIGGERING_ACTOR:$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git" repo
 
 if [ -d repo ]; then
     cd repo
