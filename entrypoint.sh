@@ -21,14 +21,12 @@ if [ -d repo ]; then
     for edited_file in $edited_files; do
         reformated_file=$(terraform fmt -list=true "$edited_file")
         if [ -n "$reformated_file" ]; then
-            echo $reformated_files
             reformated_files="$reformated_files\n-$reformated_file"
         fi
     done
-    echo $reformated_files
 
     # If exist re-formatting .tf file
-    if [ -n "$reformated_files"]; then
+    if [ -n "$reformated_files" ]; then
 
         git config --global user.name $INPUT_TRIGGERING_ACTOR && \
             git config --global user.email $INPUT_TRIGGERING_ACTOR@github.com && \
