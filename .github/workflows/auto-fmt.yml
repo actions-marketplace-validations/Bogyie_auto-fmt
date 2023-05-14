@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     name: auto-fmt
     steps:
-      - uses: Bogyie/auto-fmt@v0.1.2
+      - uses: Bogyie/auto-fmt@v1.0.0
