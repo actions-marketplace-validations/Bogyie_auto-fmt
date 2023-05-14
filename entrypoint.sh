@@ -6,13 +6,12 @@
 # INPUT_BASE_REF
 # INPUT_HEAD_REF 
 # INPUT_TRIGGERING_ACTOR
-ROOT_DIR="/"
 PULL_NUMBER=$(grep -o '[0-9]*' $INPUT_REF)
 
 git clone "https://$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git" repo
 
 if [ -d repo ]; then
-    cd $ROOT_DIR/repo
+    cd repo
     git pull origin $INPUT_BASE_REF
     git pull origin $INPUT_HEAD_REF
     git checkout $INPUT_HEAD_REF
