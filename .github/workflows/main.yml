@@ -1,0 +1,12 @@
+on: push
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-fmt:
+    runs-on: ubuntu-latest
+    name: auto-fmt
+    steps:
+      - uses: Bogyie/auto-fmt@v0.0.1
