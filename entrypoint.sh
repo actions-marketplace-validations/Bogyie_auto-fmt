@@ -5,4 +5,4 @@
 # INPUT_BASE_REF
 # INPUT_HEAD_REF 
 
-git clone "https://$INPUT_TOKEN@github.com/$INPUT_REPOSITORY repo"
+git clone "https://$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git"
