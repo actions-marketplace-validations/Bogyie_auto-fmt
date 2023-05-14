@@ -26,7 +26,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'ghcr.io/u-cto-devops/auto-fmt:main'
+  image: 'docker://ghcr.io/u-cto-devops/auto-fmt:main'
   args:
     - ${{ inputs.token }}
     - ${{ inputs.repository }}
