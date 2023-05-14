@@ -1,8 +1,8 @@
 #!/bin/sh -l
 
-GITHUB_TOKEN=$1
-REPO=$2
-BASE_REF=$3
-HEAD_REF=$4
+# INPUT_TOKEN
+# INPUT_REPOSITORY
+# INPUT_BASE_REF
+# INPUT_HEAD_REF 
 
-git clone "https://$GITHUB_TOKEN@github.com/$REPO repo"
+git clone "https://$INPUT_TOKEN@github.com/$INPUT_REPOSITORY repo"
