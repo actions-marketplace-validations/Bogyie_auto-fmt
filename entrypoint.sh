@@ -21,7 +21,7 @@ if [ -d repo ]; then
     for edited_file in $edited_files; do
         reformat_needs=$(terraform fmt -write=false -check "$edited_file")
         if [ -n "$reformat_needs" ]; then
-            reformated_file=$(terraform fmt -write=false -list=true "$edited_file")
+            reformated_file=$(terraform fmt -list=true "$edited_file")
             reformated_files="$reformated_files\n- [$reformated_file]($reformated_file)"
         fi
     done
