@@ -1,5 +1,7 @@
 FROM ubuntu:latest AS ubuntu
 
+WORKDIR /var/auto-fmt
+
 # Install git, gpg, wget, lsb-release
 RUN apt-get update && apt-get install -y git gpg wget lsb-release
 
@@ -10,7 +12,7 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
     apt-get update && \
     apt-get install terraform
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY entrypoint.sh entrypoint.sh
+RUN chmod +x entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]

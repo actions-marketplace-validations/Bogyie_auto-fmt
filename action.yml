@@ -18,11 +18,16 @@ inputs:
   haed_ref:
     default: ${{ github.head_ref }}
 
+  triggering_actor:
+    default: ${{ github.triggering_actor }}
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.token }}
     - ${{ inputs.repository }}
+    - ${{ inputs.ref }}
     - ${{ inputs.base_ref }}
     - ${{ inputs.head_ref }}
+    - ${{ inputs.triggering_actor }}
