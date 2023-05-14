@@ -23,7 +23,7 @@ if [ -d repo ]; then
         reformated_file=$(terraform fmt $edited_file)
         if [ -z "$reformated_file" ]; then
             reformated_files+="- $reformated_file\n"
-        done
+        fi
     done
 
     git add .
@@ -42,7 +42,5 @@ if [ -d repo ]; then
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/$INPUT_REPOSITORY/issues/$PULL_NUMBER/comments \
                 -d '{"body":"'$reformated_files'"}'
-
-    done
-
-done
+    fi
+fi
