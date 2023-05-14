@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     name: auto-fmt
     steps:
-      - uses: Bogyie/auto-fmt@v1.0.0
+      - uses: u-cto-devops/auto-fmt@v1.0.0
