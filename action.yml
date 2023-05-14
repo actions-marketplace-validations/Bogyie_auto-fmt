@@ -12,6 +12,9 @@ inputs:
   repository:
     default: ${{ github.repository }}
 
+  ref:
+    default: ${{ github.ref }}
+
   base_ref:
     default: ${{ github.base_ref }}
 
@@ -27,6 +30,7 @@ runs:
   args:
     - ${{ inputs.token }}
     - ${{ inputs.repository }}
+    - ${{ inputs.ref }}
     - ${{ inputs.base_ref }}
     - ${{ inputs.head_ref }}
     - ${{ inputs.triggering_actor }}

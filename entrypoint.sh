@@ -8,15 +8,13 @@
 # INPUT_TRIGGERING_ACTOR
 PULL_NUMBER=$(grep -o '[0-9]*' $INPUT_REF)
 
-git clone "https://$INPUT_TRIGGERING_ACTOR:$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git" repo
+git clone "https://$INPUT_TRIGGERING_ACTOR:$INPUT_TOKEN@github.com/$INPUT_REPOSITORY.git" -b $INPUT_BASE_REF repo
 
 if [ -d repo ]; then
     cd repo
-    git pull origin $INPUT_BASE_REF
-    git pull origin $INPUT_HEAD_REF
-    git checkout $INPUT_HEAD_REF
+    git checkout -t origin/$INPUT_HEAD_REF
     
-    edited_files=`git diff --name-only $INPUT_BASE_REF | grep -i '.tf$' `
+    edited_files=`git diff --name-only origin/$INPUT_BASE_REF origin/$INPUT_HEAD_REF | grep -i '.tf$' `
     reformated_files=""
     for edited_file in $edited_files; do
         reformated_file=$(terraform fmt -list=true $edited_file)
