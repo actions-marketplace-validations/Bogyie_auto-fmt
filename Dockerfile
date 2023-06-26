@@ -1,4 +1,4 @@
-FROM bitnami/git
+FROM alpine/git
 
 LABEL terraform_version=1.4.6
 
